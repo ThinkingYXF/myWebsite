@@ -1,6 +1,7 @@
 let http = require('http'),
 	fs = require('fs'),
-	globalUrl = '/home/yangxuefeng/Documents/work/myWebsite/myWebsite';
+	config = require('config'),
+	globalUrl = config.get('urlConfig').url;
 
 var server = http.createServer((req,res)=>{
 	res.setHeader("Access-Control-Allow-Origin" , "*");
