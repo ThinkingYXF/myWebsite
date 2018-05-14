@@ -1,5 +1,4 @@
 let http = require('http'),
-	fs = require('fs'),
 	express = require('express'),
 	app = express(),
 	config = require('config'),

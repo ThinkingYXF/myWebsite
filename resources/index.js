@@ -27,7 +27,8 @@ $(document).ready(function(){
 	});
 
 	$('.myHobby img').click(function(){
-		$.modal('dancing',{},function(modal){
+		var className = $(this).prop('class');
+		$.modal(className,{},function(modal){
 			console.log('modal');
 		});
 	});
