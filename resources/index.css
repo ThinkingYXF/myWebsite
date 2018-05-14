@@ -50,6 +50,7 @@ header > .headerNav > li > ul{
 	box-shadow: 0 0 8px #cdcdcd;
 	color: #585858;
 	display: none;
+	z-index: 1;
 }
 header > .headerNav > li > ul > li{
 	line-height: 20px;
@@ -82,4 +83,49 @@ header > .headerNav > li > ul > li:hover{
 	width: 100%;
 	height: 300px;
 	position: absolute;
+	display: none;
+}
+.banner > img.native{
+	display: block;
+}
+.banner > ul{
+	position: absolute;
+	bottom: 0px;
+	left: 40%;
+}
+.banner > ul li {
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	background: #fff;
+	float: left;
+	margin-right: 10px;
+	cursor: pointer;
+}
+.banner > ul li.native{
+	background: red;
+}
+
+.mySchool, .myHobby{
+	padding: 10px;
+	overflow: hidden;
+}
+.mySchool h2, .myHobby h2{
+	color: aqua;
+}
+.mySchool img{
+	width: 100%;
+}
+.mySchool p, .myHobby p{
+	text-indent: 2em;
+	font-size: 16px;
+}
+.myHobby img{
+	width: 47%;
+	margin: 0 5px 5px 0 ;
+	border: 2px solid #f3f4f5;
+	cursor: pointer;
+}
+.myHobby img:hover{
+	border: 2px solid yellow;
 }
