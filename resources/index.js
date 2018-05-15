@@ -42,7 +42,6 @@ $(document).ready(function(){
 	}
 	var socket = new Socket();
 	socket.socket.on('connect',function(){
-		console.log('client connect success');
 		socket.msg();
 	});
 });

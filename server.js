@@ -12,6 +12,6 @@ server.listen(8084);
 io.on('connection',function(socket){
 	console.log('server connect success');
 	socket.on('login',function(param){
-		console.log(param, 'param');
+
 	});
 });

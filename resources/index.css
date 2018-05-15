@@ -58,6 +58,9 @@ header > .headerNav > li > ul > li{
 	margin: 2px 5px;
 	border-bottom: 1px solid #ddd;
 }
+header > .headerNav > li > ul > li:last-child{
+	border-bottom: none;
+}
 header > .headerNav > li > ul > li:hover{
 	background: #ccc;
 }
