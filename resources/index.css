@@ -76,38 +76,6 @@ header > .headerNav > li > ul > li:hover{
 	height: 300px;
 	position: relative;
 }
-/* .content .banner > .bannerImg{
-	height: 300px;
-	width: 100%;
-	overflow: hidden;
-	position: relative;
-} */
-.banner > img{
-	width: 100%;
-	height: 300px;
-	position: absolute;
-	display: none;
-}
-.banner > img.native{
-	display: block;
-}
-.banner > ul{
-	position: absolute;
-	bottom: 0px;
-	left: 40%;
-}
-.banner > ul li {
-	width: 15px;
-	height: 15px;
-	border-radius: 50%;
-	background: #fff;
-	float: left;
-	margin-right: 10px;
-	cursor: pointer;
-}
-.banner > ul li.native{
-	background: red;
-}
 
 .mySchool, .myHobby{
 	padding: 10px;
