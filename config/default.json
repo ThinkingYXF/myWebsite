@@ -1,4 +1,10 @@
 {
+	"dbconfig": {
+		"host": "localhost",
+		"user": "Thinking",
+		"password": "12345678",
+		"database": "mysql"
+	},
 	"urlConfig": {
 		"url": "/home/yangxuefeng/Documents/work/myWebsite/myWebsite"
 	}

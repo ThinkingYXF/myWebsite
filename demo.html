@@ -17,6 +17,18 @@
             }).success(function(json){
                 console.log(json);
             });
+
+            $.ajax({
+                url: 'http://localhost:8086/send',
+                type: 'POST',
+                data: {
+                    name: 'zhao',
+                    age: 23,
+                    sex: 0
+                }
+            }).success(function(json){
+                console.log(json);
+            });
         });
     </script>
 </body>
