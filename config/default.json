@@ -1,11 +1,8 @@
 {
 	"dbconfig": {
-		"host": "localhost",
-		"user": "Thinking",
-		"password": "12345678",
+		"host": "47.93.232.133",
+		"user": "yxf",
+		"password": "yxf123456YXF.",
 		"database": "mysql"
-	},
-	"urlConfig": {
-		"url": "/home/yangxuefeng/Documents/work/myWebsite/myWebsite"
 	}
 }

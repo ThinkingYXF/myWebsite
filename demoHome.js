@@ -1,4 +1,6 @@
 // exports.handler = function(){
+process.env.NODE_ENV = "home";
+
 let http = require('http'),
     config = require('config'),
     bodyParser = require('body-parser'),
@@ -16,16 +18,16 @@ connection.connect(function(err){
 connection.query('select user from user;',function(err, results){
     console.log(err,results);
 });
-// connection.end();
+connection.end();
 server.listen(8086);
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
-app.get('/userList', function(req, res){
-    connection.query('select * from ;',function(err, results){
+// var urlencodedParser = bodyParser.urlencoded({ extended: false })
+// app.get('/userList', function(req, res){
+//     connection.query('select * from ;',function(err, results){
        
-    });
-    res.status(200),
-    res.json(json);
-});
+//     });
+//     res.status(200),
+//     res.json(json);
+// });
 // app.post('/send', urlencodedParser, function(req, res){
 //     console.log(req.body);
 //     res.status(200);
