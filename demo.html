@@ -1,35 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>demo</title>
-</head>
-<body>
-    hello world
-    <script src="./resources/lib/jquery-2.2.4.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $.ajax({
-                url: 'http://localhost:8086/me',
-                type: 'GET'
-            }).success(function(json){
-                console.log(json);
-            });
+    <link rel="stylesheet" href="./resources/lib/bootstrap.min.css">
+    <title>login</title>
+    <style>
+        .registerDiv {
+            display: none;
+        }
 
-            $.ajax({
-                url: 'http://localhost:8086/send',
-                type: 'POST',
-                data: {
-                    name: 'zhao',
-                    age: 23,
-                    sex: 0
+        .registerContainer>div,
+        .loginContainer>div {
+            margin-bottom: 20px;
+        }
+        .registerLink,
+        .loginLink {
+            color: blue;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="registerDiv">
+        <h2>注册</h2>
+        <div class="col-md-4 registerContainer">
+            <div class="col-md-12">
+                <label for="" class="col-md-2 control-label">姓名: </label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control registerUserName">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <label for="" class="col-md-2 control-label">密码: </label>
+                <div class="col-md-8">
+                    <input type="password" class="form-control registerPassword">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <label for="" class="col-md-2 control-label">确认密码: </label>
+                <div class="col-md-8">
+                    <input type="password" class="form-control registerSurePassword">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <label for="" class="col-md-2 control-label">手机号: </label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control registerPhone">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <label for="" class="col-md-2 control-label">邮箱: </label>
+                <div class="col-md-8">
+                    <input type="email" class="form-control registerEmail">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <button class="btn btn-sm btn-default registerBtn">注册</button>
+                    <span style="margin-left: 10px">已有账号? <b class="loginLink">立即登录</b></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="loginDiv">
+        <h2>登录</h2>
+        <div class="col-md-4 loginContainer">
+            <div class="col-md-12">
+                <label for="" class="col-md-2 control-label">姓名: </label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control loginUserName">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <label for="" class="col-md-2 control-label">密码: </label>
+                <div class="col-md-8">
+                    <input type="password" class="form-control loginPassword">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <button class="btn btn-sm btn-default loginBtn">登录</button>
+                    <span style="margin-left: 10px">没有账号? <b class="registerLink">注册</b>一个</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./resources/lib/jquery-2.2.4.min.js"></script>
+    <script src="./resources/lib/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            //注册
+            $('.registerBtn').click(function () {
+                var name = $.trim(('.registerUserName').val());
+                var password = $.trim(('.registerPassword').val());
+                var surePassword = $.trim(('.registerSurePassword').val());
+                var phone = $.trim(('.registerPhone').val());
+                var email = $.trim(('.registerEmail').val());
+                if(name == ''){
+                    alert('姓名不能为空');
+                    return false;
                 }
-            }).success(function(json){
-                console.log(json);
+                if(password == ''){
+                    alert('密码不能为空');
+                    return false;
+                }
+                if(surePassword == ''){
+                    alert('密码不能为空');
+                    return false;
+                }
+                if (surePassword != password) {
+                    alert('两次输入密码不一致')
+                    return false;
+                }
+                var params = {
+                    name: name,
+                    password: password,
+                    phone: phone ? phone : null,
+                    email: email ? email : null
+                }
+                $.ajax({
+                    url: '/register',
+                    type: 'POST',
+                    data: params
+                }).success(function (json) {
+                    if (!json.message)
+                        alert('注册成功');
+                    else {
+                        alert(json.message);
+                        return false;
+                    }
+                    $('.registerDiv input').val('');
+                    $('.registerDiv').hide();
+                    $('.loginDiv').show();
+                });
+            });
+            //切换
+            $('.loginLink').click(function(){
+                $('.registerDiv').hide();
+                $('.loginDiv').show();
+            });
+            $('.registerLink').click(function(){
+                $('.registerDiv').show();
+                $('.loginDiv').hide();
+            });
+            //登录
+            $('.loginBtn').click(function(){
+                var name = $.trim($('.loginUserName').val());
+                var password = $.trim($('.loginPassword').val());
+                if(name == ''){
+                    alert('请输入姓名');
+                    return false;
+                }
+                if(password == ''){
+                    alert('请输入密码');
+                    return false;
+                }
+                $.ajax({
+                    url: '/login',
+                    method: 'POST',
+                    data: {
+                        name: name,
+                        password: password
+                    }
+                }).success(function(json){
+                    if (!json.message)
+                        alert('登录成功');
+                    else {
+                        alert(json.message);
+                        return false;
+                    }
+                    $('.loginDiv input').val('');
+                });
             });
         });
     </script>
 </body>
+
 </html>
