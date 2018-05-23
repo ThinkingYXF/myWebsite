@@ -1,12 +1,20 @@
-var base = require('../base.js');
+let base = require('../base.js'),									//引入base
+	crypto = require('crypto'),										//md5加密
 
+	bodyParser = require('body-parser'),			//解析params
+	urlencodedParser = bodyParser.urlencoded({ extended: false });	//
+//md5加密
+function cryptoPwd(password){
+	var md5 = crypto.createHash('md5');
+	return md5.update(password).digest('hex');
+}
 function returnResult(message){
 	if(message)
 		return {success: false, message: message};
 	else
 		return {success: true}
 }
-exports.handler = function(connection, app, urlencodedParser, cryptoPwd){
+exports.handler = function(connection, app){
 	//注册
 	app.post('/register', urlencodedParser, function(req, res){
 		req.body.password = cryptoPwd(req.body.password);

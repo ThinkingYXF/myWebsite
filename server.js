@@ -1,29 +1,30 @@
 // exports.handler = function(){
 let http = require('http'),
     config = require('config'),
-    bodyParser = require('body-parser'),    //解析params
     express = require('express'),
     mysql = require('mysql'),
-    crypto = require('crypto'),
     app = express();
 app.use('/', express.static(__dirname));
 
-//登录模块
-var loginModule = require('./interface/login.js');
-
-//加密
-function cryptoPwd(password){
-    var md5 = crypto.createHash('md5');
-    return md5.update(password).digest('hex');
-}
 let server = http.createServer(app);
+//socket.io
+let io = require('socket.io').listen(server);
+io.on('connection',function(socket){
+    socket.on('login',function(param){
+
+    })
+});
+
+//数据库连接
 let dbconfig = config.get('dbconfig');
 let connection = mysql.createConnection(dbconfig);
 connection.connect();
 
-server.listen(8086);
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+server.listen(8084);
+
+//登录模块
+var loginModule = require('./interface/login.js');
 
 //注入登录注册接口
-loginModule.handler(connection, app, urlencodedParser, cryptoPwd);
+loginModule.handler(connection, app);
 

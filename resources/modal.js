@@ -35,3 +35,33 @@ $.modal.attachEvents = function(modal, callback){
 		}
 	});
 }
+
+$.alert = function() {
+	var data = {};
+	$.each(arguments, function(idx, value) {
+		if (typeof value !== 'string')
+			return true;
+		if (data['content'])
+			data['title'] = data['content'];
+		data['content'] = value;
+		if (data['title'])
+			return false;
+	});
+	return $.modal('alert', data);
+};
+
+$.confirm = function() {
+	var data = {};
+	$.each(arguments, function(idx, value) {
+		if (typeof value !== 'string')
+			return true;
+		if (data['content'])
+			data['title'] = data['content'];
+		data['content'] = value;
+		if (data['title'])
+			return false;
+	});
+	return $.modal('confirm', data).done(function(modal) {
+		modal.modal('hide');
+	});
+}
