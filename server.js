@@ -5,6 +5,21 @@ let http = require('http'),
     mysql = require('mysql'),
     app = express();
 app.use('/', express.static(__dirname));
+//设置模板引擎
+app.set('views', './www');                        //页面放在views文件夹下
+app.set('view engine', 'html');                     //使用ejs引擎
+app.engine( '.html', require( 'ejs' ).__express );
+
+//session
+let session = require('express-session');
+app.use(session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: false,
+    cookie:{
+        maxAge: 1000*60*30          //过期时间设置(单位毫秒) 30min
+    }
+}));
 
 let server = http.createServer(app);
 //socket.io
@@ -22,9 +37,11 @@ connection.connect();
 
 server.listen(8084);
 
-//登录模块
-var loginModule = require('./interface/login.js');
+//页面设置
+var getPageModule = require('./interface/getPage');
+getPageModule.handler(app);
 
-//注入登录注册接口
+//登录模块
+var loginModule = require('./interface/login');
 loginModule.handler(connection, app);
 

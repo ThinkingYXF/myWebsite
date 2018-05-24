@@ -3,7 +3,9 @@
   "lockfileVersion": 1,
   "dependencies": {
     "config": "^1.30.0",
+    "ejs": "^2.6.1",
     "express": "^4.16.3",
+    "express-session": "^1.15.6",
     "md5": "^2.2.1",
     "mysql": "^2.15.0",
     "socket.io": "^2.1.0"

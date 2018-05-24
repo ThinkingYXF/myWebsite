@@ -64,6 +64,12 @@ header > .headerNav > li > ul > li:last-child{
 header > .headerNav > li > ul > li:hover{
 	background: #ccc;
 }
+header .logout{
+	float: right;
+	line-height: 70px;
+	margin-right: 20px;
+	cursor: pointer;
+}
 /* content */
 .content{
 	background: #f3f4f5;
@@ -73,7 +79,6 @@ header > .headerNav > li > ul > li:hover{
 	border-radius: 0 0 5px 5px;
 }
 .content .banner{
-	height: 300px;
 	position: relative;
 }
 

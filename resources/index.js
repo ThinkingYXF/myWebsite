@@ -11,6 +11,11 @@ $(document).ready(function(){
 			console.log('modal');
 		});
 	});
+	$('.logout').click(function(){
+		$.post('/logout',function(json){
+			location.reload();
+		});
+	});
 
 
 	var Socket = function(){

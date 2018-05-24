@@ -73,8 +73,9 @@ $(document).ready(function () {
 				password: password
 			}
 		}).success(function(json){
-			if (!json.message)
-				$.alert('登录成功');
+			if (!json.message){
+				location.href = '/home';
+			}
 			else {
 				$.alert(json.message);
 				return false;

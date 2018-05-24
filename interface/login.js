@@ -1,7 +1,6 @@
-let base = require('../base.js'),									//引入base
+let base = require('../base'),										//引入base
 	crypto = require('crypto'),										//md5加密
-
-	bodyParser = require('body-parser'),			//解析params
+	bodyParser = require('body-parser'),							//解析params
 	urlencodedParser = bodyParser.urlencoded({ extended: false });	//
 //md5加密
 function cryptoPwd(password){
@@ -44,11 +43,20 @@ exports.handler = function(connection, app){
 			if(userArr.length > 0){
 				if(userArr[0].password != req.body.password){
 					res.json(returnResult('用户名密码不匹配'));
-				}else
+				}else{
+					console.log('user:' + req.body.name + ' logined', new Date());
+					req.session.user = req.body.name;
 					res.json(returnResult());
+				}
 			}else{
 				res.json(returnResult('用户名不存在'));
 			}
 		});
+	});
+	//注销
+	app.post('/logout',urlencodedParser, function(req, res){
+		console.log('user:' + req.session.user + ' logouted', new Date());
+		req.session.user = null;
+		res.redirect('/');
 	});
 }
