@@ -1,6 +1,6 @@
 $(document).ready(function () {
 	//注册
-	$('.registerBtn').click(function () {
+	$('#register').submit(function () {
 		var name = $.trim($('.registerUserName').val());
 		var password = $.trim($('.registerPassword').val());
 		var surePassword = $.trim($('.registerSurePassword').val());
@@ -43,6 +43,7 @@ $(document).ready(function () {
 			$('.registerDiv').hide();
 			$('.loginDiv').show();
 		});
+		return false;
 	});
 	//切换
 	$('.loginLink').click(function(){
@@ -54,7 +55,7 @@ $(document).ready(function () {
 		$('.registerDiv').show().find('input').val('');
 	});
 	//登录
-	$('.loginBtn').click(function(){
+	$('#login').submit(function(){
 		var name = $.trim($('.loginUserName').val());
 		var password = $.trim($('.loginPassword').val());
 		if(name == ''){
@@ -82,5 +83,6 @@ $(document).ready(function () {
 			}
 			$('.loginDiv input').val('');
 		});
+		return false;
 	});
 });

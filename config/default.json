@@ -1,6 +1,6 @@
 {
 	"dbconfig": {
-		"host": "localhost",
+		"host": "47.93.232.133",
 		"user": "yxf",
 		"password": "yxf123456YXF.",
 		"database": "yxf_mysql"
