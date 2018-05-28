@@ -11,4 +11,8 @@ exports.handler = function(app){
 		}
 		res.render('index');
 	});
+	//demo
+	app.get('/demo',function(req, res){
+		res.render('demo');
+	});
 }

@@ -6,7 +6,7 @@ let http = require('http'),
     app = express();
 app.use('/', express.static(__dirname));
 //设置模板引擎
-app.set('views', './www');                        //页面放在views文件夹下
+app.set('views', './www');                        //页面放在www文件夹下
 app.set('view engine', 'html');                     //使用ejs引擎
 app.engine( '.html', require( 'ejs' ).__express );
 

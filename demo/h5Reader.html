@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>H5 Reader</title>
+	<style>
+		img{
+			max-width: 500px;
+		}
+	</style>
+</head>
+<body>
+	<input type="file" id="upload_file" value="上传">
+	<script>
+		window.onload = function(){
+			var file_input = document.getElementById('upload_file');
+			file_input.onchange = function(e){
+				var file = e.target.files[0];
+				var reader = new FileReader();
+				reader.readAsDataURL(file);
+				reader.onload = function(stream){
+					var base64 = stream.target.result;
+					var images = document.getElementsByTagName('img');
+					if(images.length)
+						document.body.removeChild(images[0]);
+					var image = document.createElement('img');
+					image.src = base64;
+					document.body.appendChild(image);
+				}
+			}
+		}
+	</script>
+</body>
+</html>
