@@ -45,3 +45,7 @@ getPageModule.handler(app);
 var loginModule = require('./interface/login');
 loginModule.handler(connection, app);
 
+//聊天模块
+var chatModule = require('./interface/chat');
+chatModule.handler(connection, app);
+

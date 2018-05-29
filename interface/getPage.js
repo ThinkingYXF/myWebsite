@@ -15,4 +15,8 @@ exports.handler = function(app){
 	app.get('/demo',function(req, res){
 		res.render('demo');
 	});
+	//websocket
+	app.get('/websocket', function(req, res){
+		res.render('websocket');
+	});
 }

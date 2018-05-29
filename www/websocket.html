@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="../resources/lib/weui/weui.min.css">
+	<link rel="stylesheet" href="../resources/lib/weui/jquery-weui.min.css">
+	<link rel="stylesheet" href="../resources/css/websocket.css">
+	<title>聊天室</title>
+</head>
+<body>
+	<div class="weui-tab">
+		<div class="weui-tab__bd">
+			<div id="chatList" class="weui-tab__bd-item weui-tab__bd-item--active">
+				<div class="weui-panel weui-panel_access">
+					<div class="weui-panel__hd">我的聊天</div>
+					<div class="weui-panel__bd myChatList">
+						<!-- <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+							<div class="weui-media-box__hd">
+								<img class="weui-media-box__thumb" src="../resources/images/icon.jpeg">
+							</div>
+							<div class="weui-media-box__bd">
+								<h4 class="weui-media-box__title">张三</h4>
+								<p class="weui-media-box__desc">晚上去哪吃饭呀</p>
+							</div>
+						</a> -->
+
+					</div>
+					<!-- <div class="weui-panel__ft">
+						<a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
+							<div class="weui-cell__bd">查看更多</div>
+							<span class="weui-cell__ft"></span>
+						</a>
+					</div> -->
+				</div>
+			</div>
+			<div id="userList" class="weui-tab__bd-item">
+				<div class="weui-cells">
+					<div class="weui-cell">
+						<div class="weui-cell__hd">
+							<!-- <img src="../resources/images/icon.jpeg"> -->
+							<i class="weui-icon-add"></i>
+						</div>
+						<div class="weui-cell__bd">
+							<p>添加好友</p>
+						</div>
+						<!-- <div class="weui-cell__ft">说明文字</div> -->
+					</div>
+				</div>
+			</div>
+			<div id="home" class="weui-tab__bd-item">
+				<h1>页面三</h1>
+			</div>
+		</div>
+
+		<div class="weui-tabbar">
+			<a href="#chatList" class="weui-tabbar__item weui-bar__item--on">
+				<span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>
+				<div class="weui-tabbar__icon">
+					<img src="../resources/images/icon_nav_dialog.png" alt="">
+				</div>
+				<p class="weui-tabbar__label">主页</p>
+			</a>
+			<a href="#userList" class="weui-tabbar__item">
+				<div class="weui-tabbar__icon">
+					<img src="../resources/images/icon_nav_article.png" alt="">
+				</div>
+				<p class="weui-tabbar__label">通讯录</p>
+			</a>
+			<a href="#home" class="weui-tabbar__item">
+				<div class="weui-tabbar__icon">
+					<img src="../resources/images/icon_nav_cell.png" alt="">
+				</div>
+				<p class="weui-tabbar__label">我</p>
+			</a>
+		</div>
+	</div>
+	<script src="../resources/lib/jquery-2.2.4.min.js"></script>
+	<script src="../resources/lib/weui/jquery-weui.min.js"></script>
+	<script src="../resources/lib/mustache.min.js"></script>
+	<script src="../resources/base.js"></script>
+	<script>
+		$.get('/chatList', function(json){
+			if(json.success){
+				$.getDomModule('chatList' ,function(templateHtml){
+					var html = Mustache.render(templateHtml, json);
+					$('.myChatList').html(html);
+				});
+			}
+		})
+	</script>
+</body>
+</html>
