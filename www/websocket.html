@@ -13,18 +13,23 @@
 	<div class="weui-tab">
 		<div class="weui-tab__bd">
 			<div id="chatList" class="weui-tab__bd-item weui-tab__bd-item--active">
+				<div class="weui-search-bar" id="searchBar">
+					<form class="weui-search-bar__form">
+						<div class="weui-search-bar__box">
+						<i class="weui-icon-search"></i>
+						<input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required="">
+						<a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+						</div>
+						<label class="weui-search-bar__label" id="searchText">
+						<i class="weui-icon-search"></i>
+						<span>搜索</span>
+						</label>
+					</form>
+					<a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+				</div>
 				<div class="weui-panel weui-panel_access">
-					<div class="weui-panel__hd">我的聊天</div>
+					<!-- <div class="weui-panel__hd">我的聊天</div> -->
 					<div class="weui-panel__bd myChatList">
-						<!-- <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
-							<div class="weui-media-box__hd">
-								<img class="weui-media-box__thumb" src="../resources/images/icon.jpeg">
-							</div>
-							<div class="weui-media-box__bd">
-								<h4 class="weui-media-box__title">张三</h4>
-								<p class="weui-media-box__desc">晚上去哪吃饭呀</p>
-							</div>
-						</a> -->
 
 					</div>
 					<!-- <div class="weui-panel__ft">
@@ -47,10 +52,34 @@
 						</div>
 						<!-- <div class="weui-cell__ft">说明文字</div> -->
 					</div>
+
+					<!--通讯录-->
 				</div>
 			</div>
 			<div id="home" class="weui-tab__bd-item">
-				<h1>页面三</h1>
+				<div class="weui-cells weui-cells_form">
+					<div class="weui-cell">
+						<div class="weui-cell__bd">
+							<form action="/upload" method="POST" enctype="multipart/form-data" id="headerUpload">
+								<div class="weui-uploader">
+									<div class="weui-uploader__hd">
+										<p class="weui-uploader__title">头像上传</p>
+									</div>
+									<div class="weui-uploader__bd">
+									<ul class="weui-uploader__files" id="uploaderFiles">
+										<li class="weui-uploader__file" style="background-image:url(../resources/images/icon.jpeg)"></li>
+									</ul>
+									<div class="weui-uploader__input-box">
+										<input id="uploaderInput" class="weui-uploader__input" name="userIcon" type="file" accept="image/*" multiple="">
+										<input type="hidden" name="qq" value="1231231">
+									</div>
+									<!-- <input type="submit" value="submit"> -->
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 
@@ -77,18 +106,49 @@
 		</div>
 	</div>
 	<script src="../resources/lib/jquery-2.2.4.min.js"></script>
+	<script src="http://malsup.github.io/jquery.form.js"></script>
 	<script src="../resources/lib/weui/jquery-weui.min.js"></script>
 	<script src="../resources/lib/mustache.min.js"></script>
 	<script src="../resources/base.js"></script>
 	<script>
+		if(location.href.indexOf('#home') != -1){
+			$('.weui-tab__bd-item').removeClass('weui-tab__bd-item--active');
+			$('#home').addClass('weui-tab__bd-item--active');
+			$('.weui-tabbar__item').removeClass('weui-bar__item--on');
+			$('a[href="#home"]').addClass('weui-bar__item--on');
+		}
 		$.get('/chatList', function(json){
 			if(json.success){
 				$.getDomModule('chatList' ,function(templateHtml){
 					var html = Mustache.render(templateHtml, json);
 					$('.myChatList').html(html);
 				});
+
+				$.getDomModule('friendList' ,function(templateHtml){
+					var html = Mustache.render(templateHtml, json);
+					$('#userList > div').append(html);
+				});
 			}
-		})
+		});
+
+		// $('#headerUpload').submit(function(){
+		// 	var params = $(this).serialize();
+		// 	console.log(params);
+		// 	return false;
+		// });
+		//头像上传
+		$('#uploaderInput').on('change', function(e){
+			var file = e.target.files[0];
+			var reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = function(event){
+				$('#headerUpload').submit();
+				var base64 = event.target.result;
+				$('#uploaderFiles > li').css({
+					backgroundImage: 'url( ' + base64 + ' )'
+				});
+			}
+		});
 	</script>
 </body>
 </html>

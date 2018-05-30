@@ -1,10 +1,14 @@
 {{#data}}
-<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
-	<div class="weui-media-box__hd">
+<a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg" style="padding: 8px 15px;">
+	<div class="weui-media-box__hd" style="position: relative;width: 50px;height: 50px;">
 		<img class="weui-media-box__thumb" src="../resources/images/icon.jpeg">
+		{{#ad}}<span class="weui-badge" style="position: absolute;top: -0.4em; right: -0.4em;">0</span>{{/ad}}
 	</div>
 	<div class="weui-media-box__bd">
-		<h4 class="weui-media-box__title">{{name}}</h4>
+		<h4 class="weui-media-box__title">
+			{{name}}
+			<span class="weui-media-box__title-after">8:30</span>
+		</h4>
 		<p class="weui-media-box__desc">{{phone}}</p>
 	</div>
 	<!-- <div class="weui-media-box__ft">

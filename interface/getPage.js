@@ -13,10 +13,18 @@ exports.handler = function(app){
 	});
 	//demo
 	app.get('/demo',function(req, res){
+		if(!req.session.user){
+			res.redirect('/');
+			return false;
+		}
 		res.render('demo');
 	});
 	//websocket
 	app.get('/websocket', function(req, res){
+		if(!req.session.user){
+			res.redirect('/');
+			return false;
+		}
 		res.render('websocket');
 	});
 }
