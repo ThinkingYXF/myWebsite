@@ -60,7 +60,7 @@
 				<div class="weui-cells weui-cells_form">
 					<div class="weui-cell">
 						<div class="weui-cell__bd">
-							<form action="/upload" method="POST" enctype="multipart/form-data" id="headerUpload">
+							<form action="/upload" method="POST" enctype="multipart/form-data" id="headerUpload" target="hidden-iframe">
 								<div class="weui-uploader">
 									<div class="weui-uploader__hd">
 										<p class="weui-uploader__title">头像上传</p>
@@ -77,6 +77,7 @@
 									</div>
 								</div>
 							</form>
+							<iframe name="hidden-iframe" style="display: none;"></iframe>
 						</div>
 					</div>
 				</div>
