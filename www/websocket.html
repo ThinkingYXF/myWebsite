@@ -118,8 +118,22 @@
 			$('.weui-tabbar__item').removeClass('weui-bar__item--on');
 			$('a[href="#home"]').addClass('weui-bar__item--on');
 		}
+		$.get('/userInfo', function(json){
+			if(json.success && json.userInfo){
+				if(!json.userInfo.imgUrl)
+					json.userInfo.imgUrl = '../resources/images/icon.jpeg';
+				$('#uploaderFiles > li').css({
+					backgroundImage: 'url( ' + json.userInfo.imgUrl + ' )'
+				});
+			}
+		});
 		$.get('/chatList', function(json){
 			if(json.success){
+				$.each(json.data,function(){
+					if(!this.imgUrl){
+						this.imgUrl = '../resources/images/icon.jpeg';
+					}
+				});
 				$.getDomModule('chatList' ,function(templateHtml){
 					var html = Mustache.render(templateHtml, json);
 					$('.myChatList').html(html);
@@ -131,12 +145,6 @@
 				});
 			}
 		});
-
-		// $('#headerUpload').submit(function(){
-		// 	var params = $(this).serialize();
-		// 	console.log(params);
-		// 	return false;
-		// });
 		//头像上传
 		$('#uploaderInput').on('change', function(e){
 			var file = e.target.files[0];
