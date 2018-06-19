@@ -16,16 +16,4 @@ $(document).ready(function(){
 			location.reload();
 		});
 	});
-
-
-	var Socket = function(){
-		this.socket = io.connect();
-		this.msg = function(){
-			this.socket.emit('login','hello');
-		}
-	}
-	var socket = new Socket();
-	socket.socket.on('connect',function(){
-		socket.msg();
-	});
 });

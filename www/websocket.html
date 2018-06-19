@@ -16,13 +16,13 @@
 				<div class="weui-search-bar" id="searchBar">
 					<form class="weui-search-bar__form">
 						<div class="weui-search-bar__box">
-						<i class="weui-icon-search"></i>
-						<input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required="">
-						<a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+							<i class="weui-icon-search"></i>
+							<input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required="">
+							<a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
 						</div>
 						<label class="weui-search-bar__label" id="searchText">
-						<i class="weui-icon-search"></i>
-						<span>搜索</span>
+							<i class="weui-icon-search"></i>
+							<span>搜索</span>
 						</label>
 					</form>
 					<a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
@@ -80,7 +80,29 @@
 							<iframe name="hidden-iframe" style="display: none;"></iframe>
 						</div>
 					</div>
+
+					<div class="weui-cell">
+						<div class="weui-cell__hd">
+							<img src="../resources/images/camera.png" style="width: 30px;">
+						</div>
+						<div class="weui-cell__bd">
+							<p>标题文字</p>
+						</div>
+						<div class="weui-cell__ft">说明文字</div>
+					</div>
+					<div class="weui-cell">
+						<div class="weui-cell__hd">
+							<img src="">
+						</div>
+						<div class="weui-cell__bd">
+							<p>标题文字</p>
+						</div>
+						<div class="weui-cell__ft">说明文字</div>
+					</div>
 				</div>
+			</div>
+			<div class="weui-gallery" style="display: none">
+				<span class="weui-gallery__img previewIcon" style="background-image: url(../resources/images/icon.jpeg);"></span>
 			</div>
 		</div>
 
@@ -107,57 +129,10 @@
 		</div>
 	</div>
 	<script src="../resources/lib/jquery-2.2.4.min.js"></script>
-	<script src="http://malsup.github.io/jquery.form.js"></script>
+	<script src="../resources/lib/socket.io.js"></script>
 	<script src="../resources/lib/weui/jquery-weui.min.js"></script>
 	<script src="../resources/lib/mustache.min.js"></script>
 	<script src="../resources/base.js"></script>
-	<script>
-		if(location.href.indexOf('#home') != -1){
-			$('.weui-tab__bd-item').removeClass('weui-tab__bd-item--active');
-			$('#home').addClass('weui-tab__bd-item--active');
-			$('.weui-tabbar__item').removeClass('weui-bar__item--on');
-			$('a[href="#home"]').addClass('weui-bar__item--on');
-		}
-		$.get('/userInfo', function(json){
-			if(json.success && json.userInfo){
-				if(!json.userInfo.imgUrl)
-					json.userInfo.imgUrl = '../resources/images/icon.jpeg';
-				$('#uploaderFiles > li').css({
-					backgroundImage: 'url( ' + json.userInfo.imgUrl + ' )'
-				});
-			}
-		});
-		$.get('/chatList', function(json){
-			if(json.success){
-				$.each(json.data,function(){
-					if(!this.imgUrl){
-						this.imgUrl = '../resources/images/icon.jpeg';
-					}
-				});
-				$.getDomModule('chatList' ,function(templateHtml){
-					var html = Mustache.render(templateHtml, json);
-					$('.myChatList').html(html);
-				});
-
-				$.getDomModule('friendList' ,function(templateHtml){
-					var html = Mustache.render(templateHtml, json);
-					$('#userList > div').append(html);
-				});
-			}
-		});
-		//头像上传
-		$('#uploaderInput').on('change', function(e){
-			var file = e.target.files[0];
-			var reader = new FileReader();
-			reader.readAsDataURL(file);
-			reader.onload = function(event){
-				$('#headerUpload').submit();
-				var base64 = event.target.result;
-				$('#uploaderFiles > li').css({
-					backgroundImage: 'url( ' + base64 + ' )'
-				});
-			}
-		});
-	</script>
+	<script src="../resources/js/webChat.js"></script>
 </body>
 </html>

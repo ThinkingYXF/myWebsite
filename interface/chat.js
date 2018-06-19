@@ -1,5 +1,5 @@
-// const host = "47.93.232.133:8080/";
-const host = "localhost:8084/";
+// const host = "http://47.93.232.133:8080/";
+const host = "http://localhost:8084/";
 
 var base = require('../base');
 var bodyParser = require('body-parser'),							//解析params
@@ -46,11 +46,14 @@ exports.handler = function(connection, app){
 		var userName = req.session.user;
 		if(!userName) throw 'session expired';
 
-		var url = host + file.destination + '/' + file.originalname;
-		connection.query(base.updateImgUrl(url, userName), function(err){
-			if(err) throw err;
-			res.status(200);
-			res.end();
-		});
+		res.status(200);
+		res.end();
+
+		// var url = host + file.destination + '/' + file.originalname;
+		// connection.query(base.updateImgUrl(url, userName), function(err){
+		// 	if(err) throw err;
+		// 	res.status(200);
+		// 	res.end();
+		// });
 	});
 }

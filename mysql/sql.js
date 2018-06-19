@@ -1,0 +1,3 @@
+const createAccount= "create table `user_account`(`id` int(10) unsigned not null auto_increment,`user_id` int(10) unsigned not null, `user_name` varchar(100) not null, `user_password` varchar(32) not null, `user_status` smallint(5) not null, primary key(`id`)) engine=InnoDB default charset=utf8;"
+const creatUser = "create table `user_user`(`id` int(10) unsigned not null auto_increment, `name` varchar(100) not null, `phone` varchar(20), `email` varchar(20), `userIcon` varchar(100), `isFriend` smallint(2) default '0',`createTime` datetime , primary key(`id`)) engine=InnoDB default charset=utf8;"
+const link = "ALTER TABLE user_account ADD CONSTRAINT userId FOREIGN KEY (user_id) REFERENCES user_user(id) ON UPDATE CASCADE;"

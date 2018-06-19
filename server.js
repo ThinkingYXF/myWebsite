@@ -22,13 +22,10 @@ app.use(session({
 }));
 
 let server = http.createServer(app);
-//socket.io
-let io = require('socket.io').listen(server);
-io.on('connection',function(socket){
-    socket.on('login',function(param){
 
-    })
-});
+//消息处理模块
+var getScoketodule = require('./interface/socketMsg');
+getScoketodule.handler(server);
 
 //数据库连接
 let dbconfig = config.get('dbconfig');
