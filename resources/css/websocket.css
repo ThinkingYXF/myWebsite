@@ -3,3 +3,83 @@ body, html{
 	margin: 0;
 	height: 100vh;
 }
+/* popup背景色 */
+.weui-popup__modal {
+	background: #fff !important;
+}
+/* 添加好友页面 */
+#addUser{
+	z-index: 501;
+}
+
+/*聊天界面*/
+.chatContainer{
+	display: none;
+	width: 100%;
+	height: 100%;
+	color: white;
+	z-index: 501;
+}
+.chatContainer .chatHeader{
+	background: #666;
+	height: 40px;
+	color: #fff;
+	line-height: 40px;
+}
+.chatContainer .chatHeader p > span{
+	float: left;
+	margin-left: 10px;
+}
+.chatContainer .chatContent{
+	overflow-y: auto;
+	padding-bottom: 10px;
+}
+.chatContainer .chatInputContainer{
+	position: absolute;
+	bottom: 0;
+	height: 40px;
+	width: 100%;
+	padding: 10px 5px;
+	border-top: 1px solid #ccc;
+}
+.chatContainer .chatContent .leftFriendChat, .chatContainer .chatContent .rightMyChat{
+	width: 100%;
+	/* height: 60px; */
+	overflow: hidden;
+}
+.chatContainer .chatContent .leftFriendChat .chatTime, .chatContainer .chatContent .rightMyChat .chatTime{
+	text-align: center;
+	color: #ddd;
+	font-size: 13px;
+	display: block;
+	font-weight: normal;
+	padding: 10px 0 5px 0;
+}
+.chatContainer .chatContent .rightMyChat img, .chatContainer .chatContent .rightMyChat span {
+	float: right;
+	margin-right: 5px;
+}
+.chatContainer .chatContent .leftFriendChat img, .chatContainer .chatContent .leftFriendChat span {
+	float: left;
+	margin-left: 5px;
+}
+.chatContainer .chatContent .leftFriendChat img, .chatContainer .chatContent .rightMyChat img {
+	width: 30px;
+	height: 30px;
+}
+.chatContainer .chatContent .leftFriendChat span, .chatContainer .chatContent .rightMyChat span{
+	display: inline-block;
+	padding: 3px 10px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	max-width: 70%;
+}
+.chatInputContainer > input{
+	width: 74%;
+	height: 25px;
+	padding: 5px 2%;
+	border: 1px solid #ccc;
+	outline: none;
+	float: left;
+	border: none;
+}

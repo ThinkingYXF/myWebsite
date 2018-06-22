@@ -38,6 +38,10 @@ server.listen(8084);
 var getPageModule = require('./interface/getPage');
 getPageModule.handler(app);
 
+//主页模块
+var indexModule = require('./interface/index');
+indexModule.handler(connection, app);
+
 //登录模块
 var loginModule = require('./interface/login');
 loginModule.handler(connection, app);

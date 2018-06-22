@@ -24,10 +24,12 @@ $(document).ready(function () {
 		}
 		var params = {
 			name: name,
-			password: password,
-			phone: phone ? phone : null,
-			email: email ? email : null
+			password: password
 		}
+		if(phone)
+			params['phone'] = phone;
+		if(email)
+			params['email'] = email;
 		$.ajax({
 			url: '/register',
 			type: 'POST',
@@ -75,7 +77,10 @@ $(document).ready(function () {
 			}
 		}).success(function(json){
 			if (!json.message){
-				location.href = '/home';
+				if($.judgeEngine())
+					location.href = '/home';
+				else
+					location.href = '/websocket';
 			}
 			else {
 				$.alert(json.message);

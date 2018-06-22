@@ -48,7 +48,7 @@
 							<i class="weui-icon-add"></i>
 						</div>
 						<div class="weui-cell__bd">
-							<p>添加好友</p>
+							<p class="addUser">添加好友</p>
 						</div>
 						<!-- <div class="weui-cell__ft">说明文字</div> -->
 					</div>
@@ -100,11 +100,66 @@
 						<div class="weui-cell__ft">说明文字</div>
 					</div>
 				</div>
+				<a href="/home" class="weui-btn weui-btn_mini weui-btn_default">返回主页</a>
 			</div>
 			<div class="weui-gallery" style="display: none">
 				<span class="weui-gallery__img previewIcon" style="background-image: url(../resources/images/icon.jpeg);"></span>
 			</div>
 		</div>
+		<!--添加好友-->
+		<div id="addUser" class="weui-popup__container">
+			<div class="weui-popup__overlay"></div>
+			<div class="weui-popup__modal">
+				<header>
+					<p style="padding: 10px"><a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default return">返回</a></p>
+				</header>
+				<div class="weui-search-bar" id="searchUser" style="margin-bottom: 10px;">
+					<form class="weui-search-bar__form">
+						<div class="weui-search-bar__box">
+							<i class="weui-icon-search"></i>
+							<input type="search" class="weui-search-bar__input" id="searchUserInput" placeholder="搜索" required="">
+							<a href="javascript:" class="weui-icon-clear" id="searchUserClear"></a>
+						</div>
+						<!-- <label class="weui-search-bar__label" id="searchUserText">
+							<i class="weui-icon-search"></i>
+							<span>搜索</span>
+						</label> -->
+					</form>
+					<a href="javascript:" class="weui-search-bar__cancel-btn" id="searchUserCancel">取消</a>
+				</div>
+
+			</div>
+		</div>
+
+		<!--聊天界面-->
+		<div class="weui-popup__container chatContainer">
+			<div class="weui-popup__overlay"></div>
+			<div class="weui-popup__modal">
+				<div class="chatHeader">
+					<p>
+						<span class="chatReturn"> < </span>
+						<span class="chatName">test</span>
+					</p>
+				</div>
+				<div class="chatContent">
+					<p class="leftFriendChat">
+						<b class="chatTime">20:45</b>
+						<img src="../resources/images/icon.jpeg" alt="">
+						<span>hello?</span>
+					</p>
+					<p class="rightMyChat">
+						<b class="chatTime">20:45</b>
+						<img src="../resources/images/icon.jpeg" alt="">
+						<span>在呢</span>
+					</p>
+				</div>
+				<div class="chatInputContainer">
+					<input type="text" placeholder="输入内容" class="msgInput">
+					<button class="weui-btn weui-btn_mini weui-btn_default btn-sendMsg" style="height: 35px;width: 20%">发送</button>
+				</div>
+			</div>
+		</div>
+
 
 		<div class="weui-tabbar">
 			<a href="#chatList" class="weui-tabbar__item weui-bar__item--on">

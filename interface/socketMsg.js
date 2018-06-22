@@ -4,6 +4,9 @@ exports.handler = function(server){
 	io.on('connection',function(socket){
 		socket.on('login',function(param){
 			console.log(param);
-		})
+		});
+		socket.on('sendMsg', function(friendId, msg){
+			console.log(friendId, msg);
+		});
 	});
 }

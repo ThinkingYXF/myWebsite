@@ -16,4 +16,28 @@ $(document).ready(function(){
 			location.reload();
 		});
 	});
+	//查看/修改个人资料
+	$('div.icon').click(function(){
+		$.get('/userInfo', function(json){
+			$.modal('userInfo', json.userInfo, function(modal){
+				$('.btn-sure', modal).click(function(){
+					var phone = $.trim($('.phone', modal).val()),
+						email = $.trim($('.email', modal).val());
+
+					var data = {
+						phone: phone,
+						email: email
+					}
+					$.ajax({
+						url: '/editInfo',
+						method: 'POST',
+						data: data
+					}).success(function(json){
+						if(json.success)
+							alert(json.message);
+					});
+				});
+			});
+		});
+	});
 });

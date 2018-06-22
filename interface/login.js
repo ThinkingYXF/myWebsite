@@ -17,7 +17,7 @@ exports.handler = function(connection, app){
 	//注册
 	app.post('/register', urlencodedParser, function(req, res){
 		req.body.password = cryptoPwd(req.body.password);
-		connection.query(base.judgeUser(req.body.name),function(err, userArr){
+		connection.query(base.getUserInfo(req.body.name),function(err, userArr){
 			if(err) throw err;
 			if(userArr.length == 0){
 				connection.query(base.addUser(req.body),function(err, users){
@@ -45,6 +45,10 @@ exports.handler = function(connection, app){
 					res.json(returnResult('用户名密码不匹配'));
 				}else{
 					console.log('user:' + req.body.name + ' logined', new Date());
+					//登录记录
+					// connection.query(base.loginInfo(userArr[0]),function(err, result){
+					// 	if(err) throw err;
+					// });
 					req.session.user = req.body.name;
 					res.json(returnResult());
 				}
