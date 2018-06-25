@@ -1,0 +1,71 @@
+<databases>
+	<database>test_mysql</database>
+</databases>
+<tables>
+	<table>
+		<name>user_login</name>
+		<intro>用户登录记录</intro>
+		<fieldName>
+			id					#id
+			user_id				#登录者id
+			user_name			#登录者name
+			status				#登录者状态
+		</fieldName>
+	</table>
+
+	<table>
+		<name>user_user</name>
+		<intro>用户表</intro>
+		<fieldName>
+			id					#用户id
+			name				#用户名
+			password			#用户密码 md5加密
+			phone				#用户手机号
+			email				#用户邮箱
+			createTime			#注册时间
+			userIcon			#用户头像地址
+			friend_id			#用户好友id组 "1000,1001,.."
+		</fieldName>
+	</table>
+
+	<table>
+		<name>chat_history</name>
+		<intro>聊天历史记录</intro>
+		<fieldName>
+			id					#id
+			user_id				#用户id
+			source_id			#发送人id
+			content				#消息内容
+			status				#消息状态
+			createTime			#消息产生时时间
+			chat_type			#消息类型	(0代表群组 1代表单聊, 后续添加)
+		</fieldName>
+	</table>
+
+	<table>
+		<name>messages</name>
+		<intro>推送消息</intro>
+		<fieldName>
+			id					#id
+			target_id			#接收人id
+			source_id			#推送人id
+			status				#消息状态	(0代表未读	1代表已读)
+			message_type		#消息类型
+			createTime			#时间
+			comment				#备注
+		</fieldName>
+		<message_types>
+			<type>RECEIVE_ADD_FRIEND		收到添加好友</type>
+			<type>RECEIVE_AGREE_ADD			对方接受好友</type>
+			<type>RECEIVE_REFUSE_ADD		对方拒绝好友</type>
+		</message_types>
+	</table>
+
+	<table>
+		<name></name>
+		<intro></intro>
+		<fieldName>
+
+		</fieldName>
+	</table>
+</tables>

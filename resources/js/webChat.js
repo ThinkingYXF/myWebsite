@@ -6,10 +6,16 @@ $(document).ready(function(){
 
 var Socket = function(){
 	this.socket = io.connect();
+	//登录成功
 	this.enter = function(){
 		this.socket.emit('login','enter success');
 	},
-	this.sendMsg = function(targetId,msg){
+	//添加好友
+	this.addFriend = function(targetId, comment){
+		this.socket.emit('addFriend', targetId, comment);
+	},
+	//发送消息
+	this.sendMsg = function(targetId, msg){
 		this.socket.emit('sendMsg', targetId, msg);
 	}
 }
@@ -50,24 +56,28 @@ $.get('/userInfo', function(json){
 });
 let loginId = null;
 //获取聊天列表
-$.get('/chatList', function(json){
-	if(json.success){
-		$.each(json.data,function(){
-			if(!this.imgUrl){
-				this.imgUrl = '../resources/images/icon.jpeg';
-			}
-		});
-		$.getDomModule('chatList' ,function(templateHtml){
-			var html = Mustache.render(templateHtml, json);
-			$('.myChatList').html(html);
-		});
+function getChatList(){
+	$.get('/chatList', function(json){
+		if(json.success){
+			$.each(json.data,function(){
+				if(!this.imgUrl){
+					this.imgUrl = '../resources/images/icon.jpeg';
+				}
+			});
+			$.getDomModule('chatList' ,function(templateHtml){
+				var html = Mustache.render(templateHtml, json);
+				$('.myChatList').html(html);
+			});
 
-		$.getDomModule('friendList' ,function(templateHtml){
-			var html = Mustache.render(templateHtml, json);
-			$('#userList > div').append(html);
-		});
-	}
-});
+			$.getDomModule('friendList' ,function(templateHtml){
+				var html = Mustache.render(templateHtml, json);
+				$('#userList > div').append(html);
+			});
+		}
+	});
+}
+getChatList();
+
 //头像上传
 $('#uploaderInput').on('change', function(e){
 	var file = e.target.files[0];
@@ -137,19 +147,30 @@ $('#searchUserInput').on('keyup', function(keycode){
 				});
 				$('#addUser').unbind().on('click', '.btn-addFriend', function(){
 					var friend = $(this).parent().parent().find('.weui-cell__bd p').text();
-					$.confirm('确认添加'+ friend +'为好友?', function(){
-						$.ajax({
-							url: '/addUser',
-							method: 'POST',
-							data: {
+					$.prompt({
+						title: '添加好友',
+						text: '确认添加' + friend + '为好友?',
+						empty: true,
+						onOK: function(comment){
+							var data = {
 								loginId: loginId,
 								targetId: targetId
 							}
-						}).success(function(json){
-							if(json.success)
-								$.alert(json.message);
-						});
-					});
+							if(comment)
+								data['comment'] = comment;
+							$.ajax({
+								url: '/addUser',
+								method: 'POST',
+								data: data
+							}).success(function(json){
+								if(json.success){
+									$.toast(json.message);
+									socket.addFriend(targetId, comment);
+									getChatList();
+								}
+							});
+						}
+					})
 				});
 			}
 		})
@@ -183,7 +204,10 @@ $( window ).resize(function() {
 	resetChatModule();
 });
 
+//聊天页面置底
 function resetChatModule(){
+	if($('.chatContainer').css('display') == 'none')
+		return false;
 	$('.chatContent').height(window.innerHeight-110);
 	var scrollTop = $('.chatContent').height(),
 		scrollHeight = $('.chatContent').scrollHeight();

@@ -23,10 +23,6 @@ app.use(session({
 
 let server = http.createServer(app);
 
-//消息处理模块
-var getScoketodule = require('./interface/socketMsg');
-getScoketodule.handler(server);
-
 //数据库连接
 let dbconfig = config.get('dbconfig');
 let connection = mysql.createConnection(dbconfig);
@@ -50,3 +46,6 @@ loginModule.handler(connection, app);
 var chatModule = require('./interface/chat');
 chatModule.handler(connection, app);
 
+//消息处理模块
+var getScoketodule = require('./interface/socketMsg');
+getScoketodule.handler(server, connection);

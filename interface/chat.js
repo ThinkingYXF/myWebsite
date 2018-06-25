@@ -1,5 +1,5 @@
-// const host = "http://47.93.232.133:8080/";
-const host = "http://localhost:8084/";
+const host = "http://47.93.232.133:8080/";
+// const host = "http://localhost:8084/";
 
 var base = require('../base');
 var bodyParser = require('body-parser'),							//解析params
@@ -57,12 +57,12 @@ exports.handler = function(connection, app){
 		res.status(200);
 		res.end();
 
-		// var url = host + file.destination + '/' + file.originalname;
-		// connection.query(base.updateImgUrl(url, loginName), function(err){
-		// 	if(err) throw err;
-		// 	res.status(200);
-		// 	res.end();
-		// });
+		var url = host + file.destination + '/' + file.originalname;
+		connection.query(base.updateImgUrl(url, loginName), function(err){
+			if(err) throw err;
+			res.status(200);
+			res.end();
+		});
 	});
 
 	//搜索用户
@@ -106,7 +106,7 @@ exports.handler = function(connection, app){
 		}
 	});
 
-	//添加好友请求	friend_id
+	//添加好友请求	friend_id (无需对方同意)
 	app.post('/addUser', urlencodedParser, function(req, res){
 		var targetId = req.body.targetId,
 			loginId = req.body.loginId;

@@ -8,5 +8,8 @@ exports.handler = function(server){
 		socket.on('sendMsg', function(friendId, msg){
 			console.log(friendId, msg);
 		});
+		socket.on('addFriend', function(friendId, comment){
+			console.log(friendId, comment);
+		});
 	});
 }
