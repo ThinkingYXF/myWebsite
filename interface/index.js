@@ -50,4 +50,14 @@ exports.handler = function(connection, app){
 			});
 		}
 	});
+	
+	
+	//收到提交的建议
+	app.post('/feedback', urlencodedParser, function(req, res){
+		connection.query("insert into feedBack(name, content) values (?, ?)",[req.body.name, req.body.content],function(err){
+			if(err) throw err;
+			res.status(200);
+			res.json({success: true, message: "反馈成功"});
+		})	
+	});
 }

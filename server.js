@@ -28,7 +28,7 @@ let dbconfig = config.get('dbconfig');
 let connection = mysql.createConnection(dbconfig);
 connection.connect();
 
-server.listen(8084);
+server.listen(8080);
 
 //页面设置
 var getPageModule = require('./interface/getPage');

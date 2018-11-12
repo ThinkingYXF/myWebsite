@@ -46,9 +46,9 @@ exports.handler = function(connection, app){
 				}else{
 					console.log('user:' + req.body.name + ' logined', new Date());
 					//登录记录
-					// connection.query(base.loginInfo(userArr[0]),function(err, result){
-					// 	if(err) throw err;
-					// });
+					connection.query(base.loginInfo(userArr[0]),function(err, result){
+					 	if(err) throw err;
+					 });
 					req.session.user = req.body.name;
 					res.json(returnResult());
 				}

@@ -18,7 +18,8 @@ exports.addUser = function(userInfo){
 }
 //登录记录
 exports.loginInfo = function(userInfo){
-	return "insert into user_login (user_name, user_id) values ('" + userInfo.name + "', '"+ userInfo.id +"');";
+	var time = parseInt(new Date().getTime()/1000);
+	return "insert into user_login (user_name, user_id, login_time) values ('" + userInfo.name + "', '"+ userInfo.id +"','"+ time +"');";
 }
 //获取用户信息
 exports.getUserInfo = function(name, id){

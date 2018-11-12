@@ -60,8 +60,8 @@ function getChatList(){
 	$.get('/chatList', function(json){
 		if(json.success){
 			$.each(json.data,function(){
-				if(!this.imgUrl){
-					this.imgUrl = '../resources/images/icon.jpeg';
+				if(!this.userIcon){
+					this.userIcon = '../resources/images/icon.jpeg';
 				}
 			});
 			$.getDomModule('chatList' ,function(templateHtml){
